@@ -1,0 +1,29 @@
+version: "3"
+services:
+  web:
+    image: im2x3m4u/flask-server:latest
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8081:80"
+    networks:
+      - flask_net
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    deploy:
+      replicas: 2
+      placement:
+        constraints: [node.role == worker]
+    command: redis-server --appendonly yes
+    networks:
+      - flask_net
+networks:
+  flask_net:
