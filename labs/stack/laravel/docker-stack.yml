@@ -9,8 +9,12 @@ services:
       placement:
         constraints: [node.role == worker]
     volumes:
-      - "/data/laravel:/app"
+      - "/Users/adisetyono/vboxdata/laravel:/app"
     working_dir: /app
     command: "php artisan serve --host=0.0.0.0 --port=8000"
-    ports:
-      - 8088:8000
+    # ports:
+    #   - 8088:8000
+networks:
+  default:
+    external:
+      name: npm_default
