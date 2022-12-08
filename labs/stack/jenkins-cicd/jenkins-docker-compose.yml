@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  jenkins:
+    image: yallalabs/jenkins:centos
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false -Dhudson.footerURL=http://klakklik.id -Duser.timezone=Asia/Jakarta
+      - JENKINS_USER=admin
+      - JENKINS_PASS=rahasiasekali
+    ports:
+      - 80:8080
+      - 443:8443
+      - 50000:50000
+    volumes:
+      - jenkins_data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+
+volumes:
+  jenkins_data:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "/data/jenkins"
