@@ -1,0 +1,17 @@
+version: "3"
+services:
+  web:
+    image: im2x3m4u/flask-server:latest
+    ports:
+      - "8081:80"
+    networks:
+      - flask_net
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    networks:
+      - flask_net
+networks:
+  flask_net:

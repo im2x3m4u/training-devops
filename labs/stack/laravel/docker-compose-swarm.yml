@@ -1,4 +1,8 @@
 version: '3'
+
+networks:
+  redis_net:
+  
 services:
   laravel:
     image: im2x3m4u/laravel-php:1.0
@@ -24,7 +28,7 @@ services:
       - storage:/app/storage/app/public
       - phpsessions:/tmp
       - ./.env:/app/.env
-
+# 
   web:
     image: im2x3m4u/laravel-web:1.0
     deploy:
